@@ -564,60 +564,20 @@
   <order>
     <hop>
       <from>Table input</from>
-      <to>Select values</to>
+      <to>Add sequence</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Select values</from>
-      <to>Table output</to>
+      <from>Add sequence</from>
+      <to>Insert / update</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>Select values</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>city</name>
-        <rename>cityname</rename>
-      </field>
-      <field>
-        <name>district</name>
-        <rename>districtname</rename>
-      </field>
-      <field>
-        <name>county</name>
-        <rename>countyname</rename>
-      </field>
-      <select_unspecified>N</select_unspecified>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>192</xloc>
-      <yloc>128</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
     <name>Table input</name>
     <type>TableInput</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
@@ -625,10 +585,10 @@
       <schema_name/>
     </partitioning>
     <connection>pp_database</connection>
-    <sql>SELECT
- city,
- district,
- county
+    <sql>SELECT DISTINCT
+ city
+, district
+, county
 FROM pp_database.pp_table
 </sql>
     <limit>0</limit>
@@ -723,8 +683,8 @@ FROM pp_database.pp_table
     </GUI>
   </step>
   <step>
-    <name>Table output</name>
-    <type>TableOutput</type>
+    <name>Add sequence</name>
+    <type>Sequence</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -733,37 +693,16 @@ FROM pp_database.pp_table
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>pp_star_database</connection>
-    <schema>pp_star_database</schema>
-    <table>dim_location</table>
-    <commit>1000</commit>
-    <truncate>N</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>Y</use_batch>
-    <specify_fields>Y</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field/>
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field/>
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field/>
-    <fields>
-      <field>
-        <column_name>cityname</column_name>
-        <stream_name>cityname</stream_name>
-      </field>
-      <field>
-        <column_name>districtname</column_name>
-        <stream_name>districtname</stream_name>
-      </field>
-      <field>
-        <column_name>countyname</column_name>
-        <stream_name>countyname</stream_name>
-      </field>
-    </fields>
+    <valuename>locationid</valuename>
+    <use_database>N</use_database>
+    <connection/>
+    <schema/>
+    <seqname>SEQ_</seqname>
+    <use_counter>Y</use_counter>
+    <counter_name/>
+    <start_at>1</start_at>
+    <increment_by>1</increment_by>
+    <max_value>999999999</max_value>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -773,7 +712,77 @@ FROM pp_database.pp_table
       </output>
     </remotesteps>
     <GUI>
-      <xloc>320</xloc>
+      <xloc>224</xloc>
+      <yloc>128</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Insert / update</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>pp_star_database</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema>pp_star_database</schema>
+      <table>dim_location</table>
+      <key>
+        <name>city</name>
+        <field>city</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>district</name>
+        <field>district</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>county</name>
+        <field>county</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>city</name>
+        <rename>city</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>district</name>
+        <rename>district</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>county</name>
+        <rename>county</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>locationid</name>
+        <rename>locationid</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>352</xloc>
       <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
