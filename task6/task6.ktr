@@ -569,16 +569,6 @@
     </hop>
     <hop>
       <from>Calculator</from>
-      <to>Add sequence</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Add sequence</from>
-      <to>Select values</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Select values</from>
       <to>Insert / update</to>
       <enabled>Y</enabled>
     </hop>
@@ -655,6 +645,64 @@
     </GUI>
   </step>
   <step>
+    <name>Insert / update</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>pp_star_database</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema>pp_star_database</schema>
+      <table>dim_time</table>
+      <key>
+        <name>transferdate</name>
+        <field>timeid</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>day</name>
+        <rename>day</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>month</name>
+        <rename>month</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>year</name>
+        <rename>year</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>timeid</name>
+        <rename>transferdate</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>448</xloc>
+      <yloc>224</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>Table input</name>
     <type>TableInput</type>
     <description/>
@@ -667,7 +715,6 @@
     </partitioning>
     <connection>pp_database</connection>
     <sql>SELECT DISTINCT transferdate
-
 FROM pp_database.pp_table
 </sql>
     <limit>0</limit>
@@ -711,142 +758,6 @@ FROM pp_database.pp_table
     </remotesteps>
     <GUI>
       <xloc>224</xloc>
-      <yloc>224</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Insert / update</name>
-    <type>InsertUpdate</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>pp_star_database</connection>
-    <commit>100</commit>
-    <update_bypassed>N</update_bypassed>
-    <lookup>
-      <schema>pp_star_database</schema>
-      <table>dim_time</table>
-      <key>
-        <name>day</name>
-        <field>day</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>month</name>
-        <field>month</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>year</name>
-        <field>year</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>day</name>
-        <rename>day</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>month</name>
-        <rename>month</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>year</name>
-        <rename>year</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>timeid</name>
-        <rename>timeid</rename>
-        <update>Y</update>
-      </value>
-    </lookup>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>640</xloc>
-      <yloc>224</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Add sequence</name>
-    <type>Sequence</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <valuename>timeid</valuename>
-    <use_database>N</use_database>
-    <connection/>
-    <schema/>
-    <seqname>SEQ_</seqname>
-    <use_counter>Y</use_counter>
-    <counter_name/>
-    <start_at>1</start_at>
-    <increment_by>1</increment_by>
-    <max_value>999999999</max_value>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>432</xloc>
-      <yloc>224</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Select values</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <select_unspecified>N</select_unspecified>
-      <remove>
-        <name>transferdate</name>
-      </remove>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>528</xloc>
       <yloc>224</yloc>
       <draw>Y</draw>
     </GUI>

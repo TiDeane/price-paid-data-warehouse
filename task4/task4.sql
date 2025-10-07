@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS dim_location (
 );
 
 CREATE TABLE IF NOT EXISTS dim_time (
-    timeid INT,
+    timeid DATETIME,
     day    INT,
     month  INT,
     year   INT,
@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS dim_time (
 
 CREATE TABLE IF NOT EXISTS fact_transaction (
     locationid INT,
-    timeid     INT,
+    timeid     DATETIME,
     price      INT,
     PRIMARY KEY (locationid, timeid),
     FOREIGN KEY (timeid) REFERENCES dim_time (timeid),
