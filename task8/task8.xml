@@ -1,0 +1,32 @@
+<Schema name="New Schema1">
+  <Cube name="Transactions" visible="true" cache="true" enabled="true">
+    <Table name="fact_transaction">
+    </Table>
+    <Dimension type="StandardDimension" visible="true" foreignKey="locationid" name="Location">
+      <Hierarchy name="Location Hierarchy" visible="true" hasAll="true" allMemberName="All Locations" primaryKey="locationid">
+        <Table name="dim_location">
+        </Table>
+        <Level name="City" visible="true" column="city" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+        <Level name="County" visible="true" column="county" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+        <Level name="DIstrict" visible="true" column="district" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" foreignKey="timeid" name="Time">
+      <Hierarchy name="Time Hierarchy" visible="true" hasAll="true" allMemberName="All Years" primaryKey="timeid">
+        <Table name="dim_time">
+        </Table>
+        <Level name="Year" visible="true" column="year" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+        <Level name="Month" visible="true" column="month" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+        <Level name="Day" visible="true" column="day" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Measure name="Total_price" column="price" datatype="Integer" aggregator="sum" visible="true">
+    </Measure>
+  </Cube>
+</Schema>
