@@ -569,6 +569,11 @@
     </hop>
     <hop>
       <from>Calculator</from>
+      <to>Value mapper</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Value mapper</from>
       <to>Insert / update</to>
       <enabled>Y</enabled>
     </hop>
@@ -577,7 +582,7 @@
     <name>Calculator</name>
     <type>Calculator</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
@@ -601,7 +606,7 @@
       <currency_symbol/>
     </calculation>
     <calculation>
-      <field_name>month</field_name>
+      <field_name>month_id</field_name>
       <calc_type>MONTH_OF_DATE</calc_type>
       <field_a>transferdate</field_a>
       <field_b/>
@@ -616,7 +621,7 @@
       <currency_symbol/>
     </calculation>
     <calculation>
-      <field_name>year</field_name>
+      <field_name>year_id</field_name>
       <calc_type>YEAR_OF_DATE</calc_type>
       <field_a>transferdate</field_a>
       <field_b/>
@@ -639,65 +644,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>336</xloc>
-      <yloc>224</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Insert / update</name>
-    <type>InsertUpdate</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>pp_star_database</connection>
-    <commit>100</commit>
-    <update_bypassed>N</update_bypassed>
-    <lookup>
-      <schema>pp_star_database</schema>
-      <table>dim_time</table>
-      <key>
-        <name>transferdate</name>
-        <field>timeid</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>day</name>
-        <rename>day</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>month</name>
-        <rename>month</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>year</name>
-        <rename>year</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>timeid</name>
-        <rename>transferdate</rename>
-        <update>Y</update>
-      </value>
-    </lookup>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>448</xloc>
+      <xloc>320</xloc>
       <yloc>224</yloc>
       <draw>Y</draw>
     </GUI>
@@ -758,6 +705,147 @@ FROM pp_database.pp_table
     </remotesteps>
     <GUI>
       <xloc>224</xloc>
+      <yloc>224</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Value mapper</name>
+    <type>ValueMapper</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <field_to_use>month_id</field_to_use>
+    <target_field>month_name</target_field>
+    <non_match_default/>
+    <fields>
+      <field>
+        <source_value>1</source_value>
+        <target_value>Jan</target_value>
+      </field>
+      <field>
+        <source_value>2</source_value>
+        <target_value>Feb</target_value>
+      </field>
+      <field>
+        <source_value>3</source_value>
+        <target_value>Mar</target_value>
+      </field>
+      <field>
+        <source_value>4</source_value>
+        <target_value>Apr</target_value>
+      </field>
+      <field>
+        <source_value>5</source_value>
+        <target_value>May</target_value>
+      </field>
+      <field>
+        <source_value>6</source_value>
+        <target_value>Jun</target_value>
+      </field>
+      <field>
+        <source_value>7</source_value>
+        <target_value>July</target_value>
+      </field>
+      <field>
+        <source_value>8</source_value>
+        <target_value>Aug</target_value>
+      </field>
+      <field>
+        <source_value>9</source_value>
+        <target_value>Sep</target_value>
+      </field>
+      <field>
+        <source_value>10</source_value>
+        <target_value>Oct</target_value>
+      </field>
+      <field>
+        <source_value>11</source_value>
+        <target_value>Nov</target_value>
+      </field>
+      <field>
+        <source_value>12</source_value>
+        <target_value>Dec</target_value>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>432</xloc>
+      <yloc>224</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Insert / update</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>pp_star_database</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema>pp_star_database</schema>
+      <table>dim_time</table>
+      <key>
+        <name>transferdate</name>
+        <field>timeid</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>timeid</name>
+        <rename>transferdate</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>year_id</name>
+        <rename>year_id</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>month_id</name>
+        <rename>month_id</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>month_name</name>
+        <rename>month_name</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>day</name>
+        <rename>day</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>544</xloc>
       <yloc>224</yloc>
       <draw>Y</draw>
     </GUI>

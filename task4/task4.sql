@@ -8,17 +8,23 @@ USE pp_star_database;
 
 CREATE TABLE IF NOT EXISTS dim_location (
     locationid   INT,
-    city         VARCHAR(50),
-    district     VARCHAR(50),
-    county       VARCHAR(50),
+    postcode     VARCHAR(10)    ,
+    paon         VARCHAR(100)   ,
+    saon         VARCHAR(50)    ,
+    streetname   VARCHAR(50)    ,
+    locality     VARCHAR(50)    ,
+    city         VARCHAR(50)    ,
+    district     VARCHAR(50)    ,
+    county       VARCHAR(50)    ,
     PRIMARY KEY (locationid)
 );
 
 CREATE TABLE IF NOT EXISTS dim_time (
-    timeid DATETIME,
-    day    INT,
-    month  INT,
-    year   INT,
+    timeid     DATETIME,
+    day        INT,
+    month_id   INT,
+    month_name VARCHAR(50),
+    year_id    INT,
     PRIMARY KEY (timeid)
 );
 
