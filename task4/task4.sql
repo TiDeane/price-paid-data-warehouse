@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS dim_time (
 CREATE TABLE IF NOT EXISTS fact_transaction (
     locationid INT,
     timeid     DATETIME,
-    price      INT,
+    price      BIGINT,
     PRIMARY KEY (locationid, timeid),
     FOREIGN KEY (timeid) REFERENCES dim_time (timeid),
     FOREIGN KEY (locationid) REFERENCES dim_location(locationid)

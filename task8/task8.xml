@@ -6,11 +6,21 @@
       <Hierarchy name="Location Hierarchy" visible="true" hasAll="true" allMemberName="All Locations" primaryKey="locationid">
         <Table name="dim_location">
         </Table>
-        <Level name="County" visible="true" column="county" type="String" levelType="Regular" hideMemberIf="Never">
+        <Level name="County" visible="true" column="county" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
         </Level>
-        <Level name="District" visible="true" column="district" type="String" levelType="Regular" hideMemberIf="Never">
+        <Level name="District" visible="true" column="district" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
         </Level>
-        <Level name="City" visible="true" column="city" type="String" levelType="Regular" hideMemberIf="Never">
+        <Level name="City" visible="true" column="city" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+        <Level name="Locality" visible="true" column="locality" type="String" uniqueMembers="false" levelType="Regular">
+        </Level>
+        <Level name="Postcode" visible="true" column="postcode" type="String" uniqueMembers="false" levelType="Regular">
+        </Level>
+        <Level name="Street Name" visible="true" column="streetname" type="String" uniqueMembers="false" levelType="Regular">
+        </Level>
+        <Level name="PAON" visible="true" column="paon" type="String" uniqueMembers="false" levelType="Regular">
+        </Level>
+        <Level name="SAON" visible="true" column="saon" type="String" uniqueMembers="false" levelType="Regular">
         </Level>
       </Hierarchy>
     </Dimension>
@@ -18,11 +28,11 @@
       <Hierarchy name="Time Hierarchy" visible="true" hasAll="true" allMemberName="All Years" primaryKey="timeid">
         <Table name="dim_time">
         </Table>
-        <Level name="Year" visible="true" column="year" type="Integer" levelType="TimeYears" hideMemberIf="Never">
+        <Level name="Year" visible="true" column="year_id" type="Integer" uniqueMembers="false" levelType="TimeYears" hideMemberIf="Never">
         </Level>
-        <Level name="Month" visible="true" column="month" type="Integer" levelType="TimeMonths" hideMemberIf="Never">
+        <Level name="Month" visible="true" column="month_name" ordinalColumn="month_id" type="String" uniqueMembers="false" levelType="TimeMonths" hideMemberIf="Never">
         </Level>
-        <Level name="Day" visible="true" column="day" type="Integer" levelType="TimeDays" hideMemberIf="Never">
+        <Level name="Day" visible="true" column="day" type="Integer" uniqueMembers="false" levelType="TimeDays" hideMemberIf="Never">
         </Level>
       </Hierarchy>
     </Dimension>
