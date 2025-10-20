@@ -1,0 +1,5 @@
+LOAD DATA LOCAL INFILE '/home/aid/Downloads/pp-2024.csv'
+INTO TABLE pp_table
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n';
