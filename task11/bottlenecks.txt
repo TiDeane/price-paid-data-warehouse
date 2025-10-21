@@ -1,1 +1,10 @@
-TODO: write bottlenecks here
+Task 5:
+- On task 5's transformation (loading data into the location dimension), the main bottleneck is the Table Input step. This is because we query multiple (8) values from the original database and ask only for DISTINCT combinations.
+- For each fact in the Fact Table to represent a single sale, we needed each “locationid” to represent the location of a single property. For this, it was necessary to include not only County, District, and City, but also more granular columns like postcode, that are necessary to identify a specific property. “Distinct” was necessary because of the “Add Sequence” step that followed - each locationid had to represent a distinct property’s location.
+
+Task 6:
+- On task 6's transformation (loading data into the time dimension), we could identify no bottlenecks. All tasks finished approximately at the same time.
+- We also use “DISTINCT” for task 6's query, but we only query for a single column (transferdate) and with two years worth of data there were less than a thousand rows.
+
+Task 7:
+- On task 7's transformation (loading data into the fact table), the main bottleneck is the Sort Rows step. This is because Sort Rows is a blocking step: it needs to read all rows from the input before it can start outputting rows to the next step (Group By).
